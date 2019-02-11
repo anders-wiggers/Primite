@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00082B</color>
+    <color name="colorPrimaryDark">#00082B</color>
+    <color name="colorAccent">#CFD16F</color>
+    <color name="shopBackground">#677D89</color>
+    <color name="buttomBackground">#00082B</color>
+    <color name="topBackground">#3D494E</color>
+    <color name="buttonButtom">#1B2430</color>
+    <color name="buttonTextButtom">#cddade</color>
+    <color name="enemyLifeBar">#B44242</color>
+    <color name="talentGreyBar">#C9CACA</color>
+    <color name="weaponBackground">#00082B</color>
+    <color name="statsBackground">#19212e</color>
+
+
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ShooterClicker</string>
+    <string name="level">LEVEL</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_level">Item Level:</string>
+    <string name="damage">Damage:</string>
+    <string name="speed">Speed:</string>
+    <string name="shop">Shop</string>
+    <string name="dps">DPS:</string>
+    <string name="weapons">WEAPONS</string>
+    <string name="skillpoint">Skill Points</string>
+    <string name="attSpeed">Attack Speed:</string>
+    <string name="statDamage">Damage:</string>
+    <string name="statCrit">Cirt Chance:</string>
+    <string name="statCritMultiplier">Crit Multiplier:</string>
+    <string name="averagedps">Average DPS:</string>
+</resources>
