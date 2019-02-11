@@ -2,7 +2,7 @@
 
 Primite is an Android Game i created to test diffrend techneies i learned in Software Achetechture course. The App is a 'Clicker' game which features an advance Talents, Loot system, Boss system, Firebase integration and much more.
 
-### The Game
+## The Game
 
 The game is a simple clicker game. The goal is to increase in power. The player can click to deal damage to an enemy. The player can they upgrade his/her charater by advancing the Talent three or by buying new weapons. Weapons can also be optained by slaying bosses. 
 
@@ -10,11 +10,11 @@ The game is a simple clicker game. The goal is to increase in power. The player 
 
 To develop the game usesing alot of differend patterns.
 
-##### Observer
+#### Observer
 
 To notify the view when the player has level up I choose to use the observer pattern, by creating the `Observer.java` interface and extending it to the `PlayerImpl.java`class. The player class is the able add subscribers to an observer list which will get notified when an event has happend 
 
-##### Strategy Pattern 
+#### Strategy Pattern 
 
 To develop the Talent point System I choose the strategy patterns as this could save me alot of work. I created the `TalentStrategy.java` interface. A standart Talent point(`Talent.java`) need a TalentStrategy to determend what is does. 
 
@@ -28,23 +28,41 @@ To develop the Talent point System I choose the strategy patterns as this could 
 ```
 The talentStrategy then affect the player with a given effect for each point spend in the point. 
 
-### Todo List
+#### Singleton
+
+To move infomation about the current player and load data from the database I use the singleton pattern. This pattern allow me to easily acces player data from all over the application where it is needed without passing the player directly to the object. 
+
+The singleton `Game.java`can be accessed easly via `Game.getInstance()`So if information about the player is need it can easly be extraced via. 
+```
+Player player = Game.getInstance().getPlayer();
+player.getLevel() 
+```
+
+This made it alot easier to program the show and weapons fragments which contains the weapons which a player can buy and the weapons a player has. 
+
+
+### Android Services
+
+### Current Todo List
 
 in the current development pipe line is:
-- [ ] Ability to sell items
-- [x] DPS on UI with talent bonus
-- [ ] Modify Weapon
-- [x] Weapon Tick in Background
-- [ ] Show advanced stats
-- [ ] Display currency gained
-- [ ] Bosses
-- [ ] Enemyshow debuff
-- [ ] Calculate Attack Speed 
+- [x] Display damage dealt 
+- [x] Observer to notify when event happens.
+- [x] Talent page done. 
+- [ ] Ability to sell items.
+- [x] DPS on UI with talent bonus.
+- [ ] Modify Weapon.
+- [x] Weapon Tick in Background.
+- [ ] Show advanced stats.
+- [ ] Display currency gained.
+- [ ] Bosses.
+- [ ] Enemyshow debuff.
+- [ ] Calculate Attack Speed.
 - [ ] Attackspeed from 0.0 then [1.0:5.0]
-- [x] Take legendary off buy table and Epic
-- [ ] Add loot table to legendary
-- [ ] Icon on talent page
-- [ ] Firebase connection
+- [x] Take legendary off buy table and Epic.
+- [ ] Add loot table to legendary.
+- [ ] Icon on talent page.
+- [ ] Firebase connection.
 
 
 
