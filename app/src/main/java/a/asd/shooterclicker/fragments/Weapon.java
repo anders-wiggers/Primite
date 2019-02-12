@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,12 +81,19 @@ public class Weapon extends Fragment {
             constraintLayout.setBackground(ContextCompat.getDrawable(context,R.drawable.rarity_common));
         }
 
+        ImageView gun = view.findViewById(R.id.weaponModel);
+
         TextView damage = view.findViewById(R.id.weaponViewDamage);
         TextView speed = view.findViewById(R.id.weaponViewSpeed);
         TextView dps = view.findViewById(R.id.weaponViewDPS);
         TextView lv = view.findViewById(R.id.weaponViewLevel);
         TextView worth = view.findViewById(R.id.weaponViewWorth);
         TextView name = view.findViewById(R.id.weaponViewName);
+
+        if(weapon.getModel().equals(GameConstants.RIFLE)) gun.setImageResource(R.drawable.rifle_model);
+        if(weapon.getModel().equals(GameConstants.HEAVY_SNIPER)) gun.setImageResource(R.drawable.sniper_model);
+        if(weapon.getModel().equals(GameConstants.MINI_GUN)) gun.setImageResource(R.drawable.mini_model);
+
 
         lv.setText(weapon.getItemLevel()+"");
         worth.setText(weapon.getWorth()+"");

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import a.asd.shooterclicker.R;
@@ -68,7 +69,11 @@ public class Statsheet extends Fragment {
 
         speed.setText(weapon.getAttackSpeed()+"");
 
+        ImageView gun = view.findViewById(R.id.weaponModel);
 
+        if(weapon.getModel().equals(GameConstants.RIFLE)) gun.setImageResource(R.drawable.rifle_model);
+        if(weapon.getModel().equals(GameConstants.HEAVY_SNIPER)) gun.setImageResource(R.drawable.sniper_model);
+        if(weapon.getModel().equals(GameConstants.MINI_GUN)) gun.setImageResource(R.drawable.mini_model);
 
         damage.setText(weapon.getBaseDamage()+"");
 

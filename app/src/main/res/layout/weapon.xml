@@ -76,7 +76,7 @@
         android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/textView14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/weaponModel" />
 
     <TextView
         android:id="@+id/weaponViewWorth"
@@ -101,16 +101,18 @@
         app:layout_constraintTop_toBottomOf="@+id/weaponViewDPS" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="35dp"
-        android:layout_height="29dp"
+        android:id="@+id/weaponModel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/weaponViewWorth"
         app:layout_constraintEnd_toStartOf="@+id/textView14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+        app:srcCompat="@drawable/mini_model" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -128,7 +130,6 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
