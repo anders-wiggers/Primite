@@ -35,6 +35,15 @@ public class GameConstants {
     public static final int EPIC_BASE_PRICE = 235;
     public static final int LEGENDARY_BASE_PRICE = 300;
 
+    public static final int LEGENDARY_DROP_CHANCE = 5;
+    public static final int EPIC_DROP_CHANCE = 75;
+    public static final int BLUE_DROP_CHANCE = 20;
+
+    public static final HashMap<String,Integer> LOOT_TABLE = new HashMap<String, Integer>() {{
+        put(RARITY_LEGENDARY, 5);
+        put(RARITY_EPIC, 75);
+        put(RARITY_RARE, 20);
+    }};
 
     public static final String RARITY_COMMON = "common";
     public static final String RARITY_UNCOMMON = "uncommon";

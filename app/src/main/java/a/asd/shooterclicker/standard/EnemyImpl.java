@@ -8,7 +8,10 @@ import a.asd.shooterclicker.activities.MainActivity;
 import a.asd.shooterclicker.framework.DamageType;
 import a.asd.shooterclicker.framework.Enemy;
 import a.asd.shooterclicker.framework.EnemyStrategies.HealthStrategy;
+import a.asd.shooterclicker.framework.EnemyStrategies.LootStrategy;
 import a.asd.shooterclicker.framework.Player;
+import a.asd.shooterclicker.framework.Weapon;
+import a.asd.shooterclicker.patterns.Game;
 import a.asd.shooterclicker.patterns.Generator;
 import a.asd.shooterclicker.standard.Damage.Damage;
 import a.asd.shooterclicker.standard.Damage.Defendants;
@@ -26,13 +29,15 @@ public class EnemyImpl implements Enemy {
 
     //Strategies
     private HealthStrategy healthStrategy;
+    private LootStrategy lootStrategy;
 
 
-    public EnemyImpl(Player player, String name, HealthStrategy healthStrategy, Defendants... defendances){
+    public EnemyImpl(String name, HealthStrategy healthStrategy, LootStrategy lootStrategy, Defendants... defendances){
         this.name = name;
-        this.player = player;
+        this.player = Game.getInstance().getPlayer();
         this.defendants = defendances;
         this.healthStrategy = healthStrategy;
+        this.lootStrategy = lootStrategy;
 
         worth = generateWorth();
         health = generateHealth();
@@ -123,6 +128,11 @@ public class EnemyImpl implements Enemy {
     @Override
     public long getExperience() {
         return experience;
+    }
+
+    @Override
+    public Weapon getLoot() {
+        return lootStrategy.getLoot();
     }
 
     public int getHealthPercent() {

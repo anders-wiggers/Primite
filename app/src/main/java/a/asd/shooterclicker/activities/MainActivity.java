@@ -45,6 +45,7 @@ import a.asd.shooterclicker.patterns.Generator;
 import a.asd.shooterclicker.standard.Damage.Damage;
 import a.asd.shooterclicker.standard.EnemyImpl;
 import a.asd.shooterclicker.standard.PlayerImpl;
+import a.asd.shooterclicker.standard.Strategies.EnemyStrategies.NoLoot;
 import a.asd.shooterclicker.standard.Strategies.EnemyStrategies.StandardHealth;
 import a.asd.shooterclicker.standard.WeaponImpl;
 
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         player.addObserver(this);
         currentWeapon = (WeaponImpl) Game.getInstance().getPlayer().getCurrentWeapon();
 
-        enemy = new EnemyImpl(player,"bob",new StandardHealth(player));
+        enemy = new EnemyImpl("bob",new StandardHealth(player),new NoLoot());
 
         Log.e("Weapon", player.getCurrentWeapon().toString());
         Log.e("Enemy", enemy.toString());
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             // Actions to do after 1 animation
-                            enemy = new EnemyImpl(player,"bob", new StandardHealth(player));
+                            enemy = new EnemyImpl("bob", new StandardHealth(player),new NoLoot());
 
                             updateView();
                         }

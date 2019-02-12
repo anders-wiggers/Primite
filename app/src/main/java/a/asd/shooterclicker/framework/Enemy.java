@@ -9,4 +9,6 @@ public interface Enemy {
     String getName();
 
     long getExperience();
+
+    Weapon getLoot();
 }
