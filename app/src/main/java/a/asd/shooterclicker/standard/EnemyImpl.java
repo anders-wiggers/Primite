@@ -45,6 +45,10 @@ public class EnemyImpl implements Enemy {
         experience = generateExperience();
     }
 
+    public long getFullHealth(){
+        return fullHealth;
+    }
+
     private long generateHealth() {
         return healthStrategy.generateHealth();
     }

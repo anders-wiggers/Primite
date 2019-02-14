@@ -77,7 +77,15 @@ public class Statsheet extends Fragment {
 
         damage.setText(weapon.getBaseDamage()+"");
 
-        int averageDps = 0;
+        int averageDps = generateAverageDps(weapon);
+
+        dps.setText(averageDps+"");
+
+        return view;
+    }
+
+    public static int generateAverageDps(WeaponImpl weapon){
+        PlayerStats playerStats = Game.getInstance().getPlayer().changeStats();
 
         double baseWithModifiers = weapon.getBaseDamage() +
                 weapon.getBaseDamage() * playerStats.getPercentFrost() +
@@ -97,12 +105,7 @@ public class Statsheet extends Fragment {
 
         double critChance = playerStats.getCritChance()/100.0;
 
-        averageDps = (int) ((critChance * baseWithModifiers * playerStats.getCritModifier() +
+        return (int) ((critChance * baseWithModifiers * playerStats.getCritModifier() +
                 (1-critChance) * baseWithModifiers) * weapon.getAttackSpeed());
-
-
-        dps.setText(averageDps+"");
-
-        return view;
     }
 }

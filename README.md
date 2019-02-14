@@ -47,18 +47,18 @@ in the current development pipe line is:
 - [x] Display damage dealt 
 - [x] Observer to notify when event happens.
 - [x] Talent page done. 
-- [ ] Ability to sell items.
-- [x] DPS on UI with talent bonus.
-- [ ] Modify Weapon.
+- [x] Take legendary off buy table and Epic.
+- [x] Add loot table to legendary.
 - [x] Weapon Tick in Background.
+- [x] DPS on UI with talent bonus.
+- [ ] Ability to sell items.
+- [ ] Modify Weapon.
 - [ ] Show advanced stats.
 - [ ] Display currency gained.
 - [ ] Bosses.
 - [ ] Enemyshow debuff.
 - [ ] Calculate Attack Speed.
 - [ ] Attackspeed from 0.0 then [1.0:5.0]
-- [x] Take legendary off buy table and Epic.
-- [ ] Add loot table to legendary.
 - [ ] Icon on talent page.
 - [ ] Firebase connection.
 
