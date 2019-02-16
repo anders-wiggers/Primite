@@ -114,7 +114,9 @@ public class EnemyImpl implements Enemy {
 
         if(damage.getBuff() != null) addBuff(damage.getBuff());
 
-        if(null != activities[0])((MainActivity) activities[0]).showDamage(damageToEnemy);
+        if(activities.length != 0) {
+            if (null != activities[0]) ((MainActivity) activities[0]).showDamage(damageToEnemy);
+        }
 
         health -= damageToEnemy;
 

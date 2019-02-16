@@ -12,6 +12,7 @@ import a.asd.shooterclicker.standard.Damage.Damage;
 import a.asd.shooterclicker.standard.Damage.Defendants;
 import a.asd.shooterclicker.standard.EnemyImpl;
 import a.asd.shooterclicker.standard.PlayerImpl;
+import a.asd.shooterclicker.standard.Strategies.EnemyStrategies.NoLoot;
 import a.asd.shooterclicker.standard.Strategies.EnemyStrategies.SniperDeBuff;
 import a.asd.shooterclicker.standard.Strategies.EnemyStrategies.StandardHealth;
 import a.asd.shooterclicker.standard.Talent;
@@ -70,7 +71,7 @@ public class TestTalents {
         wp.setModel(GameConstants.HEAVY_SNIPER);
         pl.setCurrentWeapon(wp);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl));
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot());
         e.addBuff(new Buff(new SniperDeBuff()));
         e.damageEnemy(pl.dealDamage());
 
@@ -84,7 +85,7 @@ public class TestTalents {
         wp.setModel(GameConstants.HEAVY_SNIPER);
         pl.setCurrentWeapon(wp);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl));
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot());
 
         setTalent(GameConstants.TALENTS_DISCIPLINED[0]);
         setTalent(GameConstants.TALENTS_ASSAULT_TRAINING[0]);
@@ -110,7 +111,7 @@ public class TestTalents {
         wp.setModel(GameConstants.HEAVY_SNIPER);
         pl.setCurrentWeapon(wp);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl));
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot());
 
         setTalent(GameConstants.TALENTS_DISCIPLINED[0]);
         setTalent(GameConstants.TALENTS_ASSAULT_TRAINING[0]);
@@ -145,7 +146,7 @@ public class TestTalents {
         wp.setModel(GameConstants.HEAVY_SNIPER);
         pl.setCurrentWeapon(wp);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl));
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot());
 
         setTalent(GameConstants.TALENTS_DISCIPLINED[0]);
         setTalent(GameConstants.TALENTS_ASSAULT_TRAINING[0]);

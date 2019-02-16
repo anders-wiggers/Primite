@@ -1,11 +1,7 @@
 package a.asd.shooterclicker.activities;
 
 import android.animation.ObjectAnimator;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
@@ -18,21 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -42,11 +27,8 @@ import a.asd.shooterclicker.fragments.Shop;
 import a.asd.shooterclicker.fragments.SkillPoints;
 import a.asd.shooterclicker.fragments.Statsheet;
 import a.asd.shooterclicker.fragments.WeaponList;
-import a.asd.shooterclicker.framework.Enemy;
-import a.asd.shooterclicker.framework.GameConstants;
 import a.asd.shooterclicker.framework.HorizontalProgressView;
 import a.asd.shooterclicker.framework.Observer;
-import a.asd.shooterclicker.framework.Player;
 import a.asd.shooterclicker.framework.Weapon;
 import a.asd.shooterclicker.patterns.Game;
 import a.asd.shooterclicker.patterns.Generator;
@@ -67,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private TextView currentLevel;
     private ProgressBar expericenBar;
 
-
     private TextView damage;
     private TextView speed;
     private TextView dps;
@@ -84,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         //Find Views
         openSkill = findViewById(R.id.openSkill);
@@ -111,12 +91,10 @@ public class MainActivity extends AppCompatActivity implements Observer {
         super.onStart();
         if(hasBeenAFK){
 
-            long timeToKill = timeToKillEnemy(currentWeapon,enemy);
-            long timeDiff = timeDiff(date, new Date());
+            double timeToKill = timeToKillEnemy(currentWeapon,enemy);
+            final long timeDiff = timeDiff(date, new Date());
 
-            int expGained = expGainedWhileAfk(timeToKill,timeDiff);
-
-            Log.d("Gained while afk: ", expGained+"");
+            int[] gained = gainedWhileAFK(timeToKill,timeDiff, enemy);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
@@ -124,45 +102,59 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 builder = new AlertDialog.Builder(this);
             }
             builder.setTitle("Welcome Back")
-                    .setMessage("While you have been away, you have killed: "+ "asd" + " and gained: " + expGained + " Exp")
+                    .setMessage("While you have been away, you have killed: "+ gained[2] + " gaining: " + gained[0] + " Exp and " + gained[1] + " Credit" )
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            timer();
+
+                        }
+                    })
+                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            timer(); //TODO check for double
                         }
                     })
                     .show();
-
-            player.addExperience(expGainedWhileAfk(timeToKill,timeDiff));
+            player.addExperience(gained[0]);
+            player.addBuks(gained[1]);
         }
-        //timer();
         updateView();
     }
 
-    private int expGainedWhileAfk(long timeToKill, long timeDiff){
-        int expGained;
+    public int[] gainedWhileAFK(double timeToKill, long timeDiff, EnemyImpl enemy){
+        int[] gained = {0,0,0};
 
-        if(timeDiff == 0){
-            return 0;
+        if( timeDiff == 0 ){
+            return gained;
         }
 
-        expGained = (int) (timeToKill / timeDiff);
+        double killed = ( (timeDiff * 1.0) / (timeToKill * 1.0) );
 
-        expGained = (int) enemy.getExperience() * expGained;
 
-        return Math.abs(expGained);
+        gained[0] = (int) Math.abs(enemy.getExperience() * killed);
+        gained[1] = (int) Math.abs(enemy.getWorth()* killed);
+        gained[2] = (int) killed;
+
+        return gained;
     }
 
-    private long timeToKillEnemy(WeaponImpl weapon, EnemyImpl enemy){
-        long timeToKill;
+    public double timeToKillEnemy(WeaponImpl weapon, EnemyImpl enemy){
+        double timeToKill;
 
         int average = Statsheet.generateAverageDps(weapon);
 
-        timeToKill = (average / enemy.getFullHealth());
+       // Log.e("average", average+" full health: "+ enemy.getFullHealth());
+
+
+
+        timeToKill = ((enemy.getFullHealth() * 1.0 / average * 1.0));
+
+        //Log.e("timetokillzeEnemy",timeToKill+"");
 
         return timeToKill;
     }
 
-    private long timeDiff(Date date1, Date date2){
+    private long timeDiff(Date date2, Date date1){
         long diff = date1.getTime() - date2.getTime();
         long seconds = diff / 1000;
         return seconds;
@@ -175,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
         date = new Date();
         timer.purge();
         timer.cancel();
+        timer = new Timer();
     }
 
     public void damageEnemy(View view){
@@ -182,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     public void timer(){
-        timer = new Timer();
         final TimerTask task = new TimerTask() {
             @Override
             public void run() {

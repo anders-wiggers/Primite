@@ -10,6 +10,7 @@ import a.asd.shooterclicker.standard.Damage.Damage;
 import a.asd.shooterclicker.standard.Damage.Defendants;
 import a.asd.shooterclicker.standard.EnemyImpl;
 import a.asd.shooterclicker.standard.PlayerImpl;
+import a.asd.shooterclicker.standard.Strategies.EnemyStrategies.NoLoot;
 import a.asd.shooterclicker.standard.Strategies.EnemyStrategies.StandardHealth;
 import a.asd.shooterclicker.standard.WeaponImpl;
 
@@ -27,8 +28,9 @@ public class TestDamage {
 
     @Before
     public void setup(){
+        Game game = Game.getInstance();
         d = new Damage();
-        pl = new PlayerImpl();
+        pl = game.getPlayer();
         pl.setLevel(10);
     }
 
@@ -36,7 +38,7 @@ public class TestDamage {
     public void shouldBeDamageingEnemyCorrect20whenNoWeakness(){
         d.addDamage(DamageType.NORMAL,20);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl));
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot());
 
         e.damageEnemy(d);
 
@@ -49,7 +51,7 @@ public class TestDamage {
 
         Defendants df = new Defendants(DamageType.NORMAL,1.5);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl),df);
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot(),df);
 
         e.damageEnemy(d);
 
@@ -62,7 +64,7 @@ public class TestDamage {
 
         Defendants df = new Defendants(DamageType.NORMAL,0.5);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl),df);
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot(),df);
 
         e.damageEnemy(d);
 
@@ -75,7 +77,7 @@ public class TestDamage {
 
         Defendants df = new Defendants(DamageType.NORMAL,0.0);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl),df);
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot(),df);
 
         e.damageEnemy(d);
 
@@ -90,7 +92,7 @@ public class TestDamage {
         Defendants df = new Defendants(DamageType.NORMAL,0.0);
         Defendants df1 = new Defendants(DamageType.FROST,2.0);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl),df,df1);
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot(),df,df1);
 
         e.damageEnemy(d);
 
@@ -109,7 +111,7 @@ public class TestDamage {
         Defendants df = new Defendants(DamageType.NORMAL,1.0);
         Defendants df1 = new Defendants(DamageType.FROST,2.0);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl),df,df1);
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot(),df,df1);
 
         e.damageEnemy(pl.dealDamage());
 
@@ -127,7 +129,7 @@ public class TestDamage {
         Defendants df = new Defendants(DamageType.NORMAL,1.0);
         Defendants df1 = new Defendants(DamageType.FROST,2.0);
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl),df,df1);
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot(),df,df1);
 
         long fullHealth = e.getHealth();
 
@@ -151,7 +153,7 @@ public class TestDamage {
         pl.changeStats().setPercentDamageToRifle(1.15);
 
 
-        EnemyImpl e =  new EnemyImpl(pl,"john", new StandardHealth(pl));
+        EnemyImpl e =  new EnemyImpl("john", new StandardHealth(pl), new NoLoot());
 
         e.damageEnemy(pl.dealDamage());
 
