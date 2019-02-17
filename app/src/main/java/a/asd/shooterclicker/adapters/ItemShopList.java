@@ -1,6 +1,7 @@
 package a.asd.shooterclicker.adapters;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -168,7 +169,8 @@ public class ItemShopList extends BaseExpandableListAdapter {
 
         TextView price = view.findViewById(R.id.weaponPrice);
         TextView damage = view.findViewById(R.id.shopWeaponDamage);
-        TextView Speed;
+        ConstraintLayout cl = view.findViewById(R.id.shopBagground);
+
 
         final int itemLevel = groupPosition * 5;
 
@@ -176,6 +178,16 @@ public class ItemShopList extends BaseExpandableListAdapter {
         int highend = WeaponImpl.highEnd(damageConstants[childPosition],itemLevel);
 
         final int weaponPrice = priceConstants[childPosition] * itemLevel;
+
+
+        if(childPosition == 0){
+            cl.setBackgroundResource(R.drawable.rarity_common);
+        } else if(childPosition == 1){
+            cl.setBackgroundResource(R.drawable.rarity_uncommon);
+        } else {
+            cl.setBackgroundResource(R.drawable.rarity_rare);
+        }
+
 
         price.setText(weaponPrice+"");
         damage.setText("["+lowend+"-"+highend+"]");
@@ -193,7 +205,6 @@ public class ItemShopList extends BaseExpandableListAdapter {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                     LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
                     View child = a.asd.shooterclicker.fragments.Weapon.setUIWeapon(weapon,context,inflater.inflate(R.layout.weapon, null));
-                    ;
 
                     child.setOnClickListener(new View.OnClickListener() {
                         @Override

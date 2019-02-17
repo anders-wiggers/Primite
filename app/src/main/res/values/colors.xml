@@ -7,6 +7,7 @@
     <color name="buttomBackground">#00082B</color>
     <color name="topBackground">#3D494E</color>
     <color name="buttonButtom">#1B2430</color>
+    <color name="buttonButtomPresses">#37465C</color>
     <color name="buttonTextButtom">#cddade</color>
     <color name="enemyLifeBar">#B44242</color>
     <color name="talentGreyBar">#C9CACA</color>

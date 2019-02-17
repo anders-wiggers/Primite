@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         double killed = ( (timeDiff * 1.0) / (timeToKill * 1.0) );
 
-
         gained[0] = (int) Math.abs(enemy.getExperience() * killed);
         gained[1] = (int) Math.abs(enemy.getWorth()* killed);
         gained[2] = (int) killed;
@@ -139,25 +138,13 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     public double timeToKillEnemy(WeaponImpl weapon, EnemyImpl enemy){
-        double timeToKill;
-
         int average = Statsheet.generateAverageDps(weapon);
-
-       // Log.e("average", average+" full health: "+ enemy.getFullHealth());
-
-
-
-        timeToKill = ((enemy.getFullHealth() * 1.0 / average * 1.0));
-
-        //Log.e("timetokillzeEnemy",timeToKill+"");
-
-        return timeToKill;
+        return enemy.getFullHealth() * 1.0 / average * 1.0;
     }
 
     private long timeDiff(Date date2, Date date1){
         long diff = date1.getTime() - date2.getTime();
-        long seconds = diff / 1000;
-        return seconds;
+        return diff / 1000;
     }
 
     @Override
@@ -272,10 +259,21 @@ public class MainActivity extends AppCompatActivity implements Observer {
         Boolean isThereAFragment = getSupportFragmentManager().findFragmentByTag("shop") == null;
         if(isThereAFragment) {
             removeFragment("wepList");
+            removeFragment("sp");
             replaceFragment(new Shop(),"shop");
+            clearButtomButtons();
+            findViewById(R.id.openShop).setBackgroundColor(getResources().getColor(R.color.buttonButtomPresses));
         }else{
+            clearButtomButtons();
             removeFragment("shop");
         }
+    }
+
+    private void clearButtomButtons() {
+        findViewById(R.id.openShop).setBackgroundColor(getResources().getColor(R.color.buttonButtom));
+        findViewById(R.id.openSkill).setBackgroundColor(getResources().getColor(R.color.buttonButtom));
+        findViewById(R.id.openWeapons).setBackgroundColor(getResources().getColor(R.color.buttonButtom));
+
     }
 
 
@@ -313,18 +311,17 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
     }
 
-    public void printGunNames(View view){
-        for(Weapon w : player.getWeapons()){
-            Log.e("Weapons names:", w.getName());
-        }
-    }
-
     public void openPlayerWeapons(View view){
         Boolean isThereAFragment = getSupportFragmentManager().findFragmentByTag("wepList") == null;
         if(isThereAFragment) {
             removeFragment("shop");
+            removeFragment("sp");
             replaceFragment(new WeaponList(),"wepList");
+            clearButtomButtons();
+            findViewById(R.id.openWeapons).setBackgroundColor(getResources().getColor(R.color.buttonButtomPresses));
+
         }else{
+            clearButtomButtons();
             removeFragment("wepList");
         }
     }
@@ -336,9 +333,14 @@ public class MainActivity extends AppCompatActivity implements Observer {
     public void openSkillSet(View view){
         Boolean isThereAFragment = getSupportFragmentManager().findFragmentByTag("sp") == null;
         if(isThereAFragment) {
-            removeFragment("sp");
+            removeFragment("shop");
+            removeFragment("wepList");
             replaceFragment(new SkillPoints(),"sp");
+            clearButtomButtons();
+            findViewById(R.id.openSkill).setBackgroundColor(getResources().getColor(R.color.buttonButtomPresses));
+
         }else{
+            clearButtomButtons();
             removeFragment("sp");
         }
     }

@@ -102,12 +102,12 @@
             android:id="@+id/buks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:text="TextView"
             android:textColor="@color/buttonTextButtom"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.512" />
 
         <TextView
             android:id="@+id/textView3"
@@ -130,6 +130,15 @@
             app:layout_constraintBottom_toTopOf="@+id/expBar"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="13" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/primite" />
     </android.support.constraint.ConstraintLayout>
 
     <a.asd.shooterclicker.framework.HorizontalProgressView
