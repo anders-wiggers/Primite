@@ -50,8 +50,12 @@ public class ItemShopList extends BaseExpandableListAdapter {
         int numberOfItems = 0;
         //initialize the groups
 
-        for(int i = 0; i<=player.getLevel();i += 5){
-            numberOfItems++;
+        if(player.getLevel()>100){
+            numberOfItems = 20;
+        } else {
+            for (int i = 0; i <= player.getLevel(); i += 5) {
+                numberOfItems++;
+            }
         }
         groupNames = new String[numberOfItems];
         childNames = new String[numberOfItems][3];
