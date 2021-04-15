@@ -1,22 +1,25 @@
 # PRIMITE
 
-Primite is an Android Game i created to test diffrend techniques i learned in Software Achetechture course. The App is a 'Clicker' game which features an advance Talents, Loot system, Boss system, Firebase integration and much more.
+Primite is an Android Game created to test different techniques learned during the Software Architecture course on AU. The App is a 'Clicker' game that features an advanced Talents, Loot system, Boss system, Firebase integration and much more.
+
+## Video Demo
+A video demo of the project can be view [Here](https://drive.google.com/file/d/1YfiDGx_5CANxsr4-JG7cIqGhiixOUHs2/view?usp=sharing)
 
 ## The Game
 
-The game is a simple clicker game. The goal is to increase in power. The player can click to deal damage to an enemy. The player can upgrade his/her charater by advancing the Talent three or by buying new weapons. Weapons can also be optained by slaying bosses. 
+The game is a simple clicker game. The goal is to gather as much power as possible. The player can click to deal damage to an enemy. The player can upgrade his/her character by advancing the Talent tree or by buying new weapons. Weapons can also be obtained by slaying bosses. 
 
 ### Programming Techniques
 
-To develop the game usesing alot of differend patterns.
+To develop the game different design patterns were utilized.
 
 #### Observer
 
-To notify the view when the player has level up I choose to use the observer pattern, by creating the `Observer.java` interface and extending it to the `PlayerImpl.java`class. The player class is the able add subscribers to an observer list which will get notified when an event has happend 
+To notify the view when the player has levelled up the observer pattern was chosen. The pattern is implemented by creating the `Observer.java` interface and extending it to the `PlayerImpl.java` class. The player class can add subscribers to an observer list which will get notified when an event has happens. 
 
 #### Strategy Pattern 
 
-To develop the Talent point System I choose the strategy patterns as this could save me alot of work. I created the `TalentStrategy.java` interface. A standart Talent point(`Talent.java`) need a TalentStrategy to determend what is does. 
+To develop the Talent point System strategy patterns was choosen the allows for flexible talents that can be changed during runtime. The `TalentStrategy.java` interface was created. A standard Talent point(`Talent.java`) can then extend the interface which dictates how it acts in the system. 
 
 ```
     @Override
@@ -26,11 +29,11 @@ To develop the Talent point System I choose the strategy patterns as this could 
         }
     }
 ```
-The talentStrategy then affect the player with a given effect for each point spend in the point. 
+The talentStrategy then affect the player with a given effect for each point spent in the point. 
 
 #### Singleton
 
-To move infomation about the current player and load data from the database I used the singleton pattern. This pattern allow me to easily access player data from all over the application where it is needed without passing the player directly to the object. 
+To move information regarding the current player and load data from the database the singleton pattern was used. This pattern allows easy access of player data publicly.
 
 The singleton `Game.java` can be accessed via `Game.getInstance()` Information about the player can then easly be extraced via the `getPlayer()` method. 
 ```
@@ -38,29 +41,4 @@ Player player = Game.getInstance().getPlayer();
 player.getLevel() 
 ```
 
-This made it alot easier to program the Shop and Weapons fragments which contains the weapons which a player can buy and the weapons a player has. 
-
-
-### Current Todo List
-
-in the current development pipe line is:
-- [x] Display damage dealt 
-- [x] Observer to notify when event happens.
-- [x] Talent page done. 
-- [x] Take legendary off buy table and Epic.
-- [x] Add loot table to legendary.
-- [x] Weapon Tick in Background.
-- [x] DPS on UI with talent bonus.
-- [ ] Ability to sell items.
-- [ ] Modify Weapon.
-- [ ] Show advanced stats.
-- [ ] Display currency gained.
-- [ ] Bosses.
-- [ ] Enemyshow debuff.
-- [ ] Calculate Attack Speed.
-- [ ] Attackspeed from 0.0 then [1.0:5.0]
-- [ ] Icon on talent page.
-- [ ] Firebase connection.
-
-
-
+This singleton strategy made programming the Shop and Weapons fragments easier, as all information was kept in the same place. 
