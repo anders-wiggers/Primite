@@ -3,7 +3,7 @@
 Primite is an Android Game created to test different techniques learned during the Software Architecture course on AU. The App is a 'Clicker' game that features an advanced Talents, Loot system, Boss system, Firebase integration and much more.
 
 ## Video Demo
-A video demo of the project can be view [Here](https://drive.google.com/file/d/1YfiDGx_5CANxsr4-JG7cIqGhiixOUHs2/view?usp=sharing)
+A video demo of the project can be viewed [here](https://drive.google.com/file/d/1YfiDGx_5CANxsr4-JG7cIqGhiixOUHs2/view?usp=sharing)
 
 ## The Game
 
